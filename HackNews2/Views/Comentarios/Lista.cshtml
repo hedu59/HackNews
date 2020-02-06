@@ -22,14 +22,13 @@
         <th>
             @Html.DisplayNameFor(model => model.Data)
         </th>
-
     </tr>
 
     @foreach (var item in Model)
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Noticia.Id)- @Html.DisplayFor(modelItem => item.Noticia.Titulo)
+                @Html.DisplayFor(modelItem => item.Noticia.Id)-@Html.DisplayFor(modelItem => item.Noticia.Titulo)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Comentarios)
@@ -47,7 +46,7 @@
 </table>
 
 <div>
-    <input type="button" onclick="acessaItem()" class="btn btn-default btn-sm" value="voltar" />
+    <input type="button" onclick="acessaItem()" class="btn btn-default btn-sm" value="Acessar" />
 </div>
 @Html.Hidden("urlactionItem", Url.Action("Index", "Noticias"))
 @Html.Hidden("urlactioncriar", Url.Action("Create", "Comentarios"))
