@@ -1,0 +1,71 @@
+﻿@model HackNews2.Models.Noticia
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Criar Nova Notícia</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>Noticia</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="container">
+        <div class="tooltip-arrow'">
+            <div class="col-md-6">
+                <div class="form-group">
+
+                    <div class="col-md-10">
+                        @Html.LabelFor(model => model.Titulo, htmlAttributes: new { @class = "control-label " })
+                        @Html.EditorFor(model => model.Titulo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Titulo, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+
+                    <div class="col-md-10">
+                        @Html.LabelFor(model => model.ConteudoNoticia, htmlAttributes: new { @class = "control-label " })
+                        @Html.EditorFor(model => model.ConteudoNoticia, null, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ConteudoNoticia, "", new { @class = "text-danger" })
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+
+                <div class="form-group">
+
+                    <div class="col-md-10">
+                        @Html.LabelFor(model => model.AutorNoticia, htmlAttributes: new { @class = "control-label" })
+                        @Html.EditorFor(model => model.AutorNoticia, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.AutorNoticia, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <div>
+        @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-default btn-sm" })
+        <input type="submit" value="Criar" class="btn btn-success btn-sm" />
+    </div>
+
+</div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,77 @@
+﻿@model IEnumerable<HackNews2.Models.Comentario>
+
+@{
+    ViewBag.Title = "Comentarios";
+}
+
+<h2><label class="glyphicon glyphicon-circle-arrow-right"></label> @ViewBag.Noticia </h2>
+<p>
+    <input type="button" onclick="CriarItem(this.id)" id="@ViewBag.NoticiaId" class="btn btn-success btn-sm" value="Comentar" />
+</p>
+<table class="table table-bordered table-hover table-responsive table-condensed">
+    <tr style="background-color:darkorange">
+        <th>
+            @Html.DisplayNameFor(model => model.Noticia.Id)-@Html.DisplayNameFor(model => model.Noticia.Titulo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Comentarios)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AutorComentario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Data)
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Noticia.Id)- @Html.DisplayFor(modelItem => item.Noticia.Titulo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comentarios)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AutorComentario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data)
+            </td>
+
+        </tr>
+    }
+
+</table>
+
+<div>
+    <input type="button" onclick="acessaItem()" class="btn btn-default btn-sm" value="voltar" />
+</div>
+@Html.Hidden("urlactionItem", Url.Action("Index", "Noticias"))
+@Html.Hidden("urlactioncriar", Url.Action("Create", "Comentarios"))
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="~/Scripts/jquery-3.3.1.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+
+        function acessaItem() {
+
+            var action = $("#urlactionItem").val();
+            window.location.href = action
+        }
+
+        function CriarItem(valor) {
+
+            var action = $("#urlactioncriar").val();
+            var id = valor;
+            window.location.href = action + "/" + id;
+        }
+
+    </script>
+}

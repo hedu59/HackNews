@@ -1,0 +1,89 @@
+﻿@model IEnumerable<HackNews2.Models.Noticia>
+
+@{
+    ViewBag.Title = "Notícia";
+}
+
+<h2><label class="glyphicon glyphicon-arrow-right"></label> Mural de Notícias</h2>
+
+<p>
+    @Html.ActionLink("Adicionar Nova", "Create", null, new { @class = "btn btn-success btn-sm" })
+</p>
+
+
+@using (Html.BeginForm())
+{
+    <p>
+        Buscar pelo Titulo: @Html.TextBox("titulo")
+        <input type="submit" value="Buscar" />
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger nghideErro" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                @TempData["ErrorMessage"]
+            </div>
+        }
+    </p>
+}
+<table class="table table-bordered table-hover table-responsive table-condensed ">
+    <tr style="background-color:cornflowerblue">
+        <th>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </th>
+        <th>
+            Notícia
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Data)
+        </th>
+        <th>
+            Autor
+        </th>
+        @*<th></th>*@
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr onclick="acessaItem(this.id)" id="@item.Id" style="cursor:pointer">
+            <td>
+                @Html.DisplayFor(modelItem => item.Titulo)
+            </td>
+            <td width="400px">
+                @Html.DisplayFor(modelItem => item.ConteudoNoticia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AutorNoticia)
+            </td>
+            @*<td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>*@
+        </tr>
+    }
+
+</table>
+@Html.Hidden("urlactionItem", Url.Action("Lista", "Comentarios"))
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="~/Scripts/jquery-3.3.1.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+
+        function acessaItem(valor) {
+            var action = $("#urlactionItem").val();
+            var id = valor
+            window.location.href = action +"/"+ id;
+            //   alert(action);
+        }
+
+
+    </script>
+}
